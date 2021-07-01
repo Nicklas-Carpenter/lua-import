@@ -155,7 +155,7 @@ import[[* from mod1]]
 import[[a as x, b as y, c as z, d from mod2]]
 import[[mod3]]
 
--- Using functions from mod1https://en.wikipedia.org/wiki/Context-free_grammar
+-- Using functions from mod1
 a() --> prints "mod1 a"
 b() --> prints "mod1 b"
 c() --> prints "mod1 c"
