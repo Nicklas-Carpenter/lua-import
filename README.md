@@ -1,8 +1,8 @@
-# lua_import
+# lua-import
 A module import system for Lua. The last Lua module you will ever `require()`.
 
 ## Table of Contents
-- [lua_import](#lua_import)
+- [lua-import](#lua-import)
   - [Table of Contents](#table-of-contents)
   - [Rationale](#rationale)
   - [Setup](#setup)
@@ -26,23 +26,23 @@ Importing a module in Lua means importing everything. Lua has a small standard l
 
 A lot of Lua code I see spends a non-trivial amount of time to set up modules and their global names. Non-negligable amounts of vertical code space are used to import the modules and rename their members as desired (if desired). Trying to use semi-colons to do the setup and renaming on one line is verbose and makes the code harder to read. Many languages allow you to import and rename in fewer than three lines, usually one or two. I believe this lends towards more readable code.
 
-I wrote `lua_import` to address some of these complaints. `lua_import` wraps the `require` function to provide extensible import syntax. It allows you to import part or all of a module and set up your desired names all in one line; you can even do this with multiple modules in one line if you so desire (although, for stylistic reasons, I do not recommends this). The goal of `lua_import` is to make module inclusion simpler and the resulting Lua code easier to read and understand.
+I wrote `lua-import` to address some of these complaints. `lua-import` wraps the `require` function to provide extensible import syntax. It allows you to import part or all of a module and set up your desired names all in one line; you can even do this with multiple modules in one line if you so desire (although, for stylistic reasons, I do not recommends this). The goal of `lua-import` is to make module inclusion simpler and the resulting Lua code easier to read and understand.
 
 ## Setup
 ### Requirements
-The only requirements to use `lua_import` is a working version of Lua. It has only been tested with Lua v5.4.3, but it should work with earlier versions. 
+The only requirements to use `lua-import` is a working version of Lua. It has only been tested with Lua v5.4.3, but it should work with earlier versions. 
 
 ### Installation
 Installation is currently a work-in-progress. The current plan is to use a Makefile to install the modules in the proper and expected locations.
 
 ## Usage
 ### Including
-To use `lua_import`, include it with `require("import")`  before including any other module. It isn't strictly necessary to require`lua_import` first, but the intention of `lua_import` is to replace the direct use of `require`; it is not recommended to use `require` to include any module other than `lua_import`. The [example](#example) below demonstrates proper inclusion.
+To use `lua-import`, include it with `require("import")`  before including any other module. It isn't strictly necessary to require`lua-import` first, but the intention of `lua-import` is to replace the direct use of `require`; it is not recommended to use `require` to include any module other than `lua-import`. The [example](#example) below demonstrates proper inclusion.
 
 ### Basic Usage
-This section gives a basic overview of the usage of `lua_import` and should be sufficient for most users. A [more formal specification](#formal-specification) is given in a following section. 
+This section gives a basic overview of the usage of `lua-import` and should be sufficient for most users. A [more formal specification](#formal-specification) is given in a following section. 
 
-`lua_import` exposes a single function that takes a single string argument. It can be invoked:
+`lua-import` exposes a single function that takes a single string argument. It can be invoked:
 
 ```lua
 import("import statement...")
@@ -53,7 +53,7 @@ But, for readability purposes, the recommended for uses the long brackets string
 import[[import statement...]]
 ```
 
-`lua_import` import statements have three basic forms as shown below:
+`lua-import` import statements have three basic forms as shown below:
 
 ```lua
 -- Reexportation
@@ -95,7 +95,7 @@ import[[module5]]                    -- module5
 The following sections describe the different forms in more detail.
 
 #### Re-exportation Form
-As implied by the name, re-exportation form re-exports all the members of an imported module. Every member of the specified module is extracted to a global variable within the namespace of the program; that is, for every member `mod.foo` on a module `mod`, `lua_import` extracts its value to a global variable `foo`. The use of this form is discouraged, since it pollutes the global namespace and risks collision with existing functions and variables. The general syntax from this form is:
+As implied by the name, re-exportation form re-exports all the members of an imported module. Every member of the specified module is extracted to a global variable within the namespace of the program; that is, for every member `mod.foo` on a module `mod`, `lua-import` extracts its value to a global variable `foo`. The use of this form is discouraged, since it pollutes the global namespace and risks collision with existing functions and variables. The general syntax from this form is:
 
 ```lua
 import[[* from <module>]]
@@ -173,7 +173,7 @@ mod3.c() --> prints "mod3 c"
 ```
 
 ### Formal Specification
-Below is a recursive [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) describing the [grammar](https://en.wikipedia.org/wiki/Context-free_grammar) of `lua_import`.
+Below is a recursive [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) describing the [grammar](https://en.wikipedia.org/wiki/Context-free_grammar) of `lua-import`.
 
 Symbols consisting only of letters or underscores (e.g `name` or `compound_name`) represent variables in the grammar. Any symbols containing quotation marks are terminals that appear verbatim in the grammar (without the quotation marks). Vertical pipes (`|`) seperate productions of a variable. Symbols that resemble a [Lua pattern](https://www.lua.org/manual/5.4/manual.html#6.4.1) represent a terminal in the grammar that can be recognized by that pattern. Finally, the special symbol `EMPTY` represents the empty string terminal.
 
@@ -194,7 +194,7 @@ Coming soon!
 <!-- well-behaved modules should refrain from declaring global variables, allowing the user instead to choose how to assign the module. -->
 
 ## Contributing
-If you find any bugs or think of some new feature you think should be included, [create an issue](https://github.com/Nicklas-Carpenter/lua_import/issues) (if one doesn't already exists) and I'll get to it as soon as I can. If you are up to it, feel free to work on the feature yourself and [make a pull request](https://github.com/Nicklas-Carpenter/lua_import/pulls). Of course, if you think I am too slow (or too unwilling) to fix a bug and add a feature, you are always welcome to fork the project.
+If you find any bugs or think of some new feature you think should be included, [create an issue](https://github.com/Nicklas-Carpenter/lua-import/issues) (if one doesn't already exists) and I'll get to it as soon as I can. If you are up to it, feel free to work on the feature yourself and [make a pull request](https://github.com/Nicklas-Carpenter/lua-import/pulls). Of course, if you think I am too slow (or too unwilling) to fix a bug and add a feature, you are always welcome to fork the project.
 
 You can also reach me at carpenter.nicklas@gmail.com.
 
