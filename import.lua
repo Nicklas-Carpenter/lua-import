@@ -12,6 +12,12 @@ local function get_module(module)
 end
 
 local function set_global(name, value)
+	-- <name> must only contain an identifier.
+	local s, e = name:find("[_%a][_%w]*")
+	if not (s == 1 and e == #name) then
+		print("Error: <name> must be an identifier")
+		return
+	end
 	load(string.format("%s = ...", name))(value)
 end
 
